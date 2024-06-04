@@ -1,0 +1,86 @@
+import { addToStorage } from "./addToStorage";
+
+export function addTodo() {
+	const content = document.getElementById("content");
+
+	const h1 = document.createElement("h1");
+	const h1TextNode = document.createTextNode("Add todo now!");
+	h1.appendChild(h1TextNode);
+
+	const form = document.createElement("form");
+	form.setAttribute("method", "get");
+	form.setAttribute("action", "/dist/index.html");
+
+	const inputContainer1 = document.createElement("div");
+	inputContainer1.classList.add("input-container");
+	const inputContainer2 = document.createElement("div");
+	inputContainer2.classList.add("input-container");
+	const inputContainer3 = document.createElement("div");
+	inputContainer3.classList.add("input-container");
+	const inputContainer4 = document.createElement("div");
+	inputContainer4.classList.add("input-container");
+
+	const titleLabel = document.createElement("label");
+	titleLabel.setAttribute("for", "title");
+	titleLabel.innerHTML = "Title: ";
+
+	const descriptionLabel = document.createElement("label");
+	descriptionLabel.setAttribute("for", "description");
+	descriptionLabel.innerHTML = "Description: ";
+
+	const dueDateLabel = document.createElement("label");
+	dueDateLabel.setAttribute("for", "dueDate");
+	dueDateLabel.innerHTML = "Due date: ";
+
+	const priorityLabel = document.createElement("label");
+	priorityLabel.setAttribute("for", "priority");
+	priorityLabel.innerHTML = "Priority: ";
+
+	const titleInput = document.createElement("input");
+	titleInput.setAttribute("id", "title");
+	titleInput.setAttribute("type", "text");
+
+	const dueDateInput = document.createElement("input");
+	dueDateInput.setAttribute("id", "dueDate");
+	dueDateInput.setAttribute("type", "text");
+
+	const priorityInput = document.createElement("input");
+	priorityInput.setAttribute("id", "priority");
+	priorityInput.setAttribute("type", "text");
+
+	const descriptionInput = document.createElement("textarea");
+	descriptionInput.setAttribute("id", "description");
+	descriptionInput.setAttribute("type", "text");
+
+	const submitButton = document.createElement("button");
+	submitButton.setAttribute("id", "submit-button");
+	submitButton.setAttribute("type", "submit");
+	submitButton.innerHTML = "Add todo!";
+	submitButton.addEventListener("click", function () {
+		const title = document.getElementById("title").value;
+		const dueDate = document.getElementById("dueDate").value;
+		const priority = document.getElementById("priority").value;
+		const description = document.getElementById("description").value;
+		addToStorage("todo", title, dueDate, priority, description);
+	});
+
+	inputContainer1.appendChild(titleLabel);
+	inputContainer1.appendChild(titleInput);
+	inputContainer2.appendChild(dueDateLabel);
+	inputContainer2.appendChild(dueDateInput);
+	inputContainer3.appendChild(priorityLabel);
+	inputContainer3.appendChild(priorityInput);
+	inputContainer4.appendChild(descriptionLabel);
+	inputContainer4.appendChild(descriptionInput);
+
+	form.appendChild(h1);
+	form.appendChild(inputContainer1);
+	form.appendChild(inputContainer2);
+	form.appendChild(inputContainer3);
+	form.appendChild(inputContainer4);
+	form.appendChild(submitButton);
+
+	content.appendChild(form);
+
+	return content;
+}
