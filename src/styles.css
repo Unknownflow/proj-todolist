@@ -31,7 +31,9 @@ li a:hover {
 	height: 100vh;
 	padding: 20px;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: top;
+	align-items: center;
 	text-align: center;
 	background-color: #c4dfe6;
 }
@@ -46,12 +48,6 @@ body {
 	margin: 20px 0;
 	display: flex;
 	justify-content: space-between;
-}
-
-#description {
-	resize: none;
-	width: 160.67px;
-	height: 100px;
 }
 
 #submit-button {

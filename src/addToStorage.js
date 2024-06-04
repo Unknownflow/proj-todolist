@@ -9,6 +9,7 @@ export function addToStorage(
 	description
 ) {
 	const newTodoItem = new TodoItem(title, dueDate, priority, description);
+	var project;
 
 	// check if projectName exists
 	const result = localStorage.getItem(projectName);
@@ -16,11 +17,11 @@ export function addToStorage(
 	// no todo items in the project
 	if (result === null) {
 		// create new project
-		const project = new Project(projectName, []);
+		project = new Project(projectName, []);
 	} else {
 		// get the project info from the localstorage and create a new project obj
 		const projectData = JSON.parse(result);
-		const project = new Project(projectData.name, projectData.projectList);
+		project = new Project(projectData.name, projectData.projectList);
 	}
 
 	project.appendTodo(newTodoItem);
