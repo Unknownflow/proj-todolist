@@ -19,6 +19,12 @@ export function addTodo() {
 	inputContainer3.classList.add("input-container");
 	const inputContainer4 = document.createElement("div");
 	inputContainer4.classList.add("input-container");
+	const inputContainer5 = document.createElement("div");
+	inputContainer5.classList.add("input-container");
+
+	const projectNameLabel = document.createElement("label");
+	projectNameLabel.setAttribute("for", "projectName");
+	projectNameLabel.innerHTML = "Project Name: ";
 
 	const titleLabel = document.createElement("label");
 	titleLabel.setAttribute("for", "title");
@@ -35,6 +41,10 @@ export function addTodo() {
 	const priorityLabel = document.createElement("label");
 	priorityLabel.setAttribute("for", "priority");
 	priorityLabel.innerHTML = "Priority: ";
+
+	const projectNameInput = document.createElement("input");
+	projectNameInput.setAttribute("id", "projectName");
+	projectNameInput.setAttribute("type", "text");
 
 	const titleInput = document.createElement("input");
 	titleInput.setAttribute("id", "title");
@@ -57,27 +67,31 @@ export function addTodo() {
 	submitButton.setAttribute("type", "submit");
 	submitButton.innerHTML = "Add todo!";
 	submitButton.addEventListener("click", function () {
+		const projectName = document.getElementById("projectName").value;
 		const title = document.getElementById("title").value;
 		const dueDate = document.getElementById("dueDate").value;
 		const priority = document.getElementById("priority").value;
 		const description = document.getElementById("description").value;
-		addToStorage("todo", title, dueDate, priority, description);
+		addToStorage(projectName, title, dueDate, priority, description);
 	});
 
-	inputContainer1.appendChild(titleLabel);
-	inputContainer1.appendChild(titleInput);
-	inputContainer2.appendChild(dueDateLabel);
-	inputContainer2.appendChild(dueDateInput);
-	inputContainer3.appendChild(priorityLabel);
-	inputContainer3.appendChild(priorityInput);
-	inputContainer4.appendChild(descriptionLabel);
-	inputContainer4.appendChild(descriptionInput);
+	inputContainer1.appendChild(projectNameLabel);
+	inputContainer1.appendChild(projectNameInput);
+	inputContainer2.appendChild(titleLabel);
+	inputContainer2.appendChild(titleInput);
+	inputContainer3.appendChild(dueDateLabel);
+	inputContainer3.appendChild(dueDateInput);
+	inputContainer4.appendChild(priorityLabel);
+	inputContainer4.appendChild(priorityInput);
+	inputContainer5.appendChild(descriptionLabel);
+	inputContainer5.appendChild(descriptionInput);
 
 	form.appendChild(h1);
 	form.appendChild(inputContainer1);
 	form.appendChild(inputContainer2);
 	form.appendChild(inputContainer3);
 	form.appendChild(inputContainer4);
+	form.appendChild(inputContainer5);
 	form.appendChild(submitButton);
 
 	content.appendChild(form);
