@@ -26,21 +26,30 @@ export function viewAllTodo() {
 		return;
 	}
 
-	// generating table n its headers
-	const table = document.createElement("table");
-	table.classList.add("todo-table");
-	const tr = document.createElement("tr");
-	const tableHeaders = ["Title", "Due date", "Priority", "Description"];
-
-	for (let i = 0; i < tableHeaders.length; i++) {
-		const th = document.createElement("th");
-		th.innerHTML = tableHeaders[i];
-		tr.appendChild(th);
-	}
-
-	table.appendChild(tr);
-
 	for (var key in storage) {
+		// create separate header for each project
+		const h2 = document.createElement("h2");
+		h2.innerHTML = "Project name: " + key;
+
+		// create separate table container for each project
+		const tableContainer = document.createElement("div");
+		tableContainer.classList.add("table-container");
+		tableContainer.appendChild(h2);
+
+		// generating table n its headers
+		const table = document.createElement("table");
+		table.classList.add("todo-table");
+		const tr = document.createElement("tr");
+		const tableHeaders = ["Title", "Due date", "Priority", "Description"];
+
+		for (let i = 0; i < tableHeaders.length; i++) {
+			const th = document.createElement("th");
+			th.innerHTML = tableHeaders[i];
+			tr.appendChild(th);
+		}
+
+		table.appendChild(tr);
+
 		// retrieving all project data from storage and getting its project list after
 		const projectData = JSON.parse(storage[key]);
 		var project = new Project(projectData.name, projectData.projectList);
@@ -57,9 +66,9 @@ export function viewAllTodo() {
 			}
 			table.appendChild(tr);
 		}
+		tableContainer.appendChild(table);
+		content.appendChild(tableContainer);
 	}
-
-	content.appendChild(table);
 
 	return content;
 }

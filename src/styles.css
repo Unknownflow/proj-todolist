@@ -4,12 +4,23 @@
 	padding: 0;
 }
 
+html {
+	font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+html {
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
 .nav-bar {
 	width: 20%;
-	height: 100vh;
+	height: inherit;
+	min-height: 100vh;
 	padding: 20px;
 	list-style-type: none;
 	background-color: #66a5ad;
+	overflow: hidden;
 }
 
 .nav-bar ul {
@@ -27,7 +38,6 @@ li a:hover {
 
 #content {
 	width: 90%;
-	height: 100vh;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
@@ -35,6 +45,8 @@ li a:hover {
 	align-items: center;
 	text-align: center;
 	background-color: #c4dfe6;
+	height: fit-content;
+	min-height: 100vh;
 }
 
 body {
@@ -64,4 +76,35 @@ th,
 td {
 	width: 25%;
 	padding: 10 px 0;
+}
+
+.table-container {
+	margin: 20px;
+}
+
+.todo-table {
+	border: 2px solid black;
+	border-collapse: collapse;
+}
+
+thead th,
+tfoot th {
+	font-family: "Rock Salt", cursive;
+}
+
+th,
+td {
+	padding: 20px;
+}
+
+th {
+	letter-spacing: 1.5px;
+}
+
+td {
+	letter-spacing: 1px;
+}
+
+tr:nth-child(even) {
+	background-color: #66a5ad;
 }
