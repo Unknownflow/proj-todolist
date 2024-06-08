@@ -1,3 +1,3 @@
 export function viewUpcoming() {
-	console.log("test");
+	console.log("upcoming");
 }

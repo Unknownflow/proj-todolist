@@ -12,27 +12,29 @@ export function addTodo() {
 	h1.appendChild(h1TextNode);
 	form.appendChild(h1);
 
-	const inputNames = {
-		projectName: "Project Name: ",
-		title: "Title: ",
-		dueDate: "Due date: ",
-		priority: "Priority: ",
-		description: "Description: ",
+	// id : [label, input type]
+	const inputLabels = {
+		projectName: ["Project Name: ", "text"],
+		title: ["Title: ", "text"],
+		dueDate: ["Due date: ", "date"],
+		priority: ["Priority: ", "number"],
+		description: ["Description: ", "text"],
 	};
 
 	// goes thru the loop to append all the inputs
-	for (var key in inputNames) {
+	for (var key in inputLabels) {
 		// create input container to store label & input
 		const inputContainer = document.createElement("div");
 		inputContainer.classList.add("input-container");
 
 		const newLabel = document.createElement("label");
 		newLabel.setAttribute("for", key);
-		newLabel.innerHTML = inputNames[key];
+		newLabel.innerHTML = inputLabels[key][0];
 
 		const newInput = document.createElement("input");
 		newInput.setAttribute("id", key);
-		newInput.setAttribute("type", "text");
+		newInput.setAttribute("type", inputLabels[key][1]);
+		newInput.required = true;
 
 		inputContainer.appendChild(newLabel);
 		inputContainer.appendChild(newInput);
