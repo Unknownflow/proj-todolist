@@ -59,7 +59,6 @@ export function viewAllTodo() {
 		for (let i = 0; i < projectList.length; i++) {
 			const tr = document.createElement("tr");
 			for (var todoKey in projectList[i]) {
-				console.log("todo", todoKey);
 				const td = document.createElement("td");
 				td.innerHTML = projectList[i][todoKey];
 				tr.appendChild(td);

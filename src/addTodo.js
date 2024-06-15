@@ -34,11 +34,37 @@ export function addTodo() {
 		const newInput = document.createElement("input");
 		newInput.setAttribute("id", key);
 		newInput.setAttribute("type", inputLabels[key][1]);
-		newInput.required = true;
+		newInput.setAttribute("required", "");
+
+		// only for priority input, min: 1st, max: 5th
+		if (key === "priority") {
+			newInput.min = 1;
+			newInput.max = 5;
+		}
 
 		inputContainer.appendChild(newLabel);
 		inputContainer.appendChild(newInput);
 		form.appendChild(inputContainer);
+	}
+
+	function areInputsEntered(
+		projectName,
+		title,
+		dueDate,
+		priority,
+		description
+	) {
+		// check with any fields are empty, then prevent it from being entered to database
+		if (
+			projectName == "" ||
+			title == "" ||
+			dueDate == "" ||
+			priority == "" ||
+			description == ""
+		) {
+			return false;
+		}
+		return true;
 	}
 
 	// creation of submit button
@@ -52,7 +78,11 @@ export function addTodo() {
 		const dueDate = document.getElementById("dueDate").value;
 		const priority = document.getElementById("priority").value;
 		const description = document.getElementById("description").value;
-		addToStorage(projectName, title, dueDate, priority, description);
+		if (
+			areInputsEntered(projectName, title, dueDate, priority, description)
+		) {
+			addToStorage(projectName, title, dueDate, priority, description);
+		}
 	});
 
 	form.appendChild(submitButton);
