@@ -8,7 +8,7 @@ export function addTodo() {
 	form.setAttribute("action", "/dist/index.html");
 
 	const h1 = document.createElement("h1");
-	const h1TextNode = document.createTextNode("Add todo now!");
+	const h1TextNode = document.createTextNode("A dd todo now!");
 	h1.appendChild(h1TextNode);
 	form.appendChild(h1);
 
@@ -17,7 +17,7 @@ export function addTodo() {
 		projectName: ["Project Name: ", "text"],
 		title: ["Title: ", "text"],
 		dueDate: ["Due date: ", "date"],
-		priority: ["Priority: ", "number"],
+		priority: ["Priority (1-10): ", "number"],
 		description: ["Description: ", "text"],
 	};
 

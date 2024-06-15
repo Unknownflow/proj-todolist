@@ -1,4 +1,5 @@
 import Project from "./Project";
+import { filterTodo } from "./filterTodo";
 
 export function viewAllTodo() {
 	// function returns true if the storage has no values stored
@@ -54,6 +55,7 @@ export function viewAllTodo() {
 		const projectData = JSON.parse(storage[key]);
 		var project = new Project(projectData.name, projectData.projectList);
 		var projectList = project.getProjectList;
+		projectList = filterTodo(projectList, "all");
 
 		// generate new row for each todo in the project
 		for (let i = 0; i < projectList.length; i++) {
