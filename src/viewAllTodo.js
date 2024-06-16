@@ -82,8 +82,7 @@ export function viewAllTodo() {
 			td.classList = "delete-button";
 			td.innerHTML = "Delete?";
 			td.addEventListener("click", function () {
-				console.log("key1", key);
-				deleteTodo(key, todoData);
+				deleteTodo(projectData.name, todoData);
 			});
 			tr.appendChild(td);
 			table.appendChild(tr);
