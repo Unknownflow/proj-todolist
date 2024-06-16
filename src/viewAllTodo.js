@@ -1,4 +1,5 @@
 import Project from "./Project";
+import { deleteTodo } from "./deleteTodo";
 import { filterTodo } from "./filterTodo";
 
 export function viewAllTodo() {
@@ -28,6 +29,8 @@ export function viewAllTodo() {
 	}
 
 	for (var key in storage) {
+		console.log("keys", key);
+
 		// create separate header for each project
 		const h2 = document.createElement("h2");
 		h2.innerHTML = "Project name: " + key;
@@ -41,7 +44,13 @@ export function viewAllTodo() {
 		const table = document.createElement("table");
 		table.classList.add("todo-table");
 		const tr = document.createElement("tr");
-		const tableHeaders = ["Title", "Due date", "Priority", "Description"];
+		const tableHeaders = [
+			"Title",
+			"Due date",
+			"Priority",
+			"Description",
+			"Delete",
+		];
 
 		for (let i = 0; i < tableHeaders.length; i++) {
 			const th = document.createElement("th");
@@ -60,11 +69,23 @@ export function viewAllTodo() {
 		// generate new row for each todo in the project
 		for (let i = 0; i < projectList.length; i++) {
 			const tr = document.createElement("tr");
+			let todoData = {};
 			for (var todoKey in projectList[i]) {
 				const td = document.createElement("td");
 				td.innerHTML = projectList[i][todoKey];
+				todoData[todoKey] = projectList[i][todoKey];
 				tr.appendChild(td);
 			}
+
+			// add delete button
+			const td = document.createElement("td");
+			td.classList = "delete-button";
+			td.innerHTML = "Delete?";
+			td.addEventListener("click", function () {
+				console.log("key1", key);
+				deleteTodo(key, todoData);
+			});
+			tr.appendChild(td);
 			table.appendChild(tr);
 		}
 		tableContainer.appendChild(table);

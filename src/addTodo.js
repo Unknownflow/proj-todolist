@@ -8,7 +8,7 @@ export function addTodo() {
 	form.setAttribute("action", "/dist/index.html");
 
 	const h1 = document.createElement("h1");
-	const h1TextNode = document.createTextNode("A dd todo now!");
+	const h1TextNode = document.createTextNode("Add todo now!");
 	h1.appendChild(h1TextNode);
 	form.appendChild(h1);
 
