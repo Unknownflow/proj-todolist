@@ -1,4 +1,5 @@
 import Project from "./Project";
+import { deleteTodo } from "./deleteTodo";
 import { filterTodo } from "./filterTodo";
 
 export function viewToday() {
@@ -41,7 +42,13 @@ export function viewToday() {
 		const table = document.createElement("table");
 		table.classList.add("todo-table");
 		const tr = document.createElement("tr");
-		const tableHeaders = ["Title", "Due date", "Priority", "Description"];
+		const tableHeaders = [
+			"Title",
+			"Due date",
+			"Priority",
+			"Description",
+			"Delete",
+		];
 
 		for (let i = 0; i < tableHeaders.length; i++) {
 			const th = document.createElement("th");
@@ -57,23 +64,40 @@ export function viewToday() {
 		var projectList = project.getProjectList;
 		projectList = filterTodo(projectList, "today");
 
-		// if after the filter, there is no todo left, skip adding to project
-		if (projectList.length == 0) {
-			tableContainer.innerHTML = "";
-		} else {
+		// only display todo if there is more than 1 todo today
+		if (projectList.length != 0) {
 			// generate new row for each todo in the project
 			for (let i = 0; i < projectList.length; i++) {
 				const tr = document.createElement("tr");
+				let todoData = {};
+
 				for (var todoKey in projectList[i]) {
 					const td = document.createElement("td");
 					td.innerHTML = projectList[i][todoKey];
+					todoData[todoKey] = projectList[i][todoKey];
 					tr.appendChild(td);
 				}
+
+				// add delete button
+				const td = document.createElement("td");
+				td.classList = "delete-button";
+				td.innerHTML = "Delete?";
+				td.addEventListener("click", function () {
+					deleteTodo(projectData.name, todoData, "today");
+				});
+				tr.appendChild(td);
 				table.appendChild(tr);
 			}
 			tableContainer.appendChild(table);
 			content.appendChild(tableContainer);
 		}
+	}
+
+	// if there is no todo displayed, display the corresponding message
+	if (content.innerHTML == "<h1>Viewing Today's Todos</h1>") {
+		const p = document.createElement("p");
+		p.innerHTML = "There are currently no todos found!";
+		content.appendChild(p);
 	}
 
 	return content;

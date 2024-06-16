@@ -1,7 +1,9 @@
 import { clearPage } from "./clearPage";
 import { viewAllTodo } from "./viewAllTodo";
+import { viewToday } from "./viewToday";
+import { viewUpcoming } from "./viewUpcoming";
 
-export function deleteTodo(key, todoData) {
+export function deleteTodo(key, todoData, page) {
 	// retrieve the project data from localstorage
 	const result = localStorage.getItem(key);
 	const projectData = JSON.parse(result);
@@ -22,5 +24,12 @@ export function deleteTodo(key, todoData) {
 	}
 
 	clearPage();
-	viewAllTodo();
+
+	if (page == "all") {
+		viewAllTodo();
+	} else if (page == "today") {
+		viewToday();
+	} else if (page == "upcoming") {
+		viewUpcoming();
+	}
 }

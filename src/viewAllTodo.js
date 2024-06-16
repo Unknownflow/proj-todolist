@@ -29,8 +29,6 @@ export function viewAllTodo() {
 	}
 
 	for (var key in storage) {
-		console.log("keys", key);
-
 		// create separate header for each project
 		const h2 = document.createElement("h2");
 		h2.innerHTML = "Project name: " + key;
@@ -82,7 +80,7 @@ export function viewAllTodo() {
 			td.classList = "delete-button";
 			td.innerHTML = "Delete?";
 			td.addEventListener("click", function () {
-				deleteTodo(projectData.name, todoData);
+				deleteTodo(projectData.name, todoData, "all");
 			});
 			tr.appendChild(td);
 			table.appendChild(tr);
