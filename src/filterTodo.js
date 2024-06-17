@@ -9,15 +9,13 @@ export function filterTodo(projectList, filter) {
 	if (filter == "today") {
 		// show only today's todo
 		projectList = projectList.filter(function (project) {
-			console.log(project.dueDate, today);
 			return project.dueDate == today;
 		});
-		console.log("y", projectList);
 		return projectList;
 	} else if (filter == "upcoming") {
 		// show future todos
 		projectList = projectList.filter(function (project) {
-			return project.dueDate > today;
+			return project.dueDate >= today;
 		});
 		return projectList;
 	} else if (filter == "all") {
