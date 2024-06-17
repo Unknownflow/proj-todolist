@@ -17,7 +17,7 @@ export function addTodo() {
 		projectName: ["Project Name: ", "text"],
 		title: ["Title: ", "text"],
 		dueDate: ["Due date: ", "date"],
-		priority: ["Priority (1-10): ", "number"],
+		priority: ["Priority (1-5): ", "number"],
 		description: ["Description: ", "text"],
 	};
 

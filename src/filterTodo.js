@@ -1,3 +1,5 @@
+import { sortTodo } from "./sortTodo";
+
 export function filterTodo(projectList, filter) {
 	// steps to get the date today
 	var today = new Date();
@@ -5,6 +7,8 @@ export function filterTodo(projectList, filter) {
 	var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 	var yyyy = today.getFullYear();
 	today = yyyy + "-" + mm + "-" + dd;
+
+	sortTodo(projectList);
 
 	if (filter == "today") {
 		// show only today's todo
