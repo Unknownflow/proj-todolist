@@ -1,6 +1,7 @@
 import Project from "./Project";
 import { deleteTodo } from "./deleteTodo";
 import { filterTodo } from "./filterTodo";
+import { expandTodo } from "./expandTodo";
 
 export function viewAllTodo() {
 	// function returns true if the storage has no values stored
@@ -42,13 +43,7 @@ export function viewAllTodo() {
 		const table = document.createElement("table");
 		table.classList.add("todo-table");
 		const tr = document.createElement("tr");
-		const tableHeaders = [
-			"Title",
-			"Due date",
-			"Priority",
-			"Description",
-			"Delete",
-		];
+		const tableHeaders = ["Title", "Due date", "Delete", "Show more"];
 
 		for (let i = 0; i < tableHeaders.length; i++) {
 			const th = document.createElement("th");
@@ -68,7 +63,8 @@ export function viewAllTodo() {
 		for (let i = 0; i < projectList.length; i++) {
 			const tr = document.createElement("tr");
 			let todoData = {};
-			for (var todoKey in projectList[i]) {
+
+			for (const todoKey of ["title", "dueDate"]) {
 				const td = document.createElement("td");
 				td.innerHTML = projectList[i][todoKey];
 				todoData[todoKey] = projectList[i][todoKey];
@@ -76,13 +72,23 @@ export function viewAllTodo() {
 			}
 
 			// add delete button
-			const td = document.createElement("td");
-			td.classList = "delete-button";
-			td.innerHTML = "Delete?";
-			td.addEventListener("click", function () {
+			const deletetd = document.createElement("td");
+			deletetd.classList = "delete-button";
+			deletetd.innerHTML = "Delete?";
+			deletetd.addEventListener("click", function () {
 				deleteTodo(projectData.name, todoData, "all");
 			});
-			tr.appendChild(td);
+			tr.appendChild(deletetd);
+
+			// add show more data button
+			const showtd = document.createElement("td");
+			showtd.classList = "show-button";
+			showtd.innerHTML = "Show more?";
+			showtd.addEventListener("click", function () {
+				expandTodo(projectData.name, projectList[i]);
+			});
+			tr.appendChild(showtd);
+
 			table.appendChild(tr);
 		}
 		tableContainer.appendChild(table);
