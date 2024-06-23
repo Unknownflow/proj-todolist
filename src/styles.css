@@ -75,7 +75,7 @@ body {
 th,
 td {
 	width: 25%;
-	padding: 10 px 0;
+	padding: 10px 0;
 }
 
 .table-container {
@@ -119,6 +119,10 @@ td {
 	font-weight: bold;
 	background-color: #c4dfe6;
 	border: none;
+}
+
+.delete-button {
+	width: auto;
 }
 
 .delete-button:hover,

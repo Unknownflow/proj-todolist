@@ -63,8 +63,12 @@ export function addTodo() {
 			description == ""
 		) {
 			return false;
+		} else if (priority < 1 || priority > 5) {
+			// ensure priority is within the correct range
+			return false;
+		} else {
+			return true;
 		}
-		return true;
 	}
 
 	// creation of submit button

@@ -8,10 +8,18 @@ export function deleteTodo(key, todoData, page) {
 	const result = localStorage.getItem(key);
 	const projectData = JSON.parse(result);
 	const projectList = projectData["projectList"];
+	console.log(key, todoData, page, projectList);
 
 	// remove the project where the tododata is identical
 	const filteredProjectList = projectList.filter(function (project) {
-		return JSON.stringify(project) != JSON.stringify(todoData);
+		console.log(
+			todoData.title != project.title,
+			new Date(todoData.dueDate) != new Date(project.dueDate)
+		);
+		return (
+			todoData.title != project.title &&
+			new Date(todoData.dueDate) != new Date(project.dueDate)
+		);
 	});
 
 	// check if there is any more items in the list
