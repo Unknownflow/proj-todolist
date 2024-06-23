@@ -11,6 +11,7 @@ function index() {
 	const viewTodayButton = document.getElementById("view-today");
 	const viewUpcomingButton = document.getElementById("view-upcoming");
 	const viewAllTodoButton = document.getElementById("view-all-todo");
+	viewAllTodo();
 
 	addTodoButton.addEventListener("click", function () {
 		clearHtml();

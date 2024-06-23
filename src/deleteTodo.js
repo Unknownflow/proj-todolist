@@ -12,13 +12,10 @@ export function deleteTodo(key, todoData, page) {
 
 	// remove the project where the tododata is identical
 	const filteredProjectList = projectList.filter(function (project) {
-		console.log(
-			todoData.title != project.title,
-			new Date(todoData.dueDate) != new Date(project.dueDate)
-		);
+		// remove item if title and due date matches correspondingly
 		return (
-			todoData.title != project.title &&
-			new Date(todoData.dueDate) != new Date(project.dueDate)
+			todoData.title != project.title ||
+			todoData.dueDate != project.dueDate
 		);
 	});
 
