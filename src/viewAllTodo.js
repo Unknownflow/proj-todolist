@@ -76,6 +76,10 @@ export function viewAllTodo() {
 				tr.appendChild(td);
 			}
 
+			for (const todoKey of ["priority", "description"]) {
+				todoData[todoKey] = projectList[i][todoKey];
+			}
+
 			// add delete button
 			const deletetd = document.createElement("td");
 			deletetd.classList = "delete-button";
@@ -90,10 +94,12 @@ export function viewAllTodo() {
 			showtd.classList = "show-button";
 			showtd.innerHTML = "Show more?";
 			showtd.addEventListener("click", function () {
-				expandTodo(projectData.name, projectList[i]);
+				expandTodo(projectData.name, todoData);
 			});
 			tr.appendChild(showtd);
 
+			// add priority class to the td for styling
+			tr.classList = "priority-" + todoData["priority"];
 			table.appendChild(tr);
 		}
 		tableContainer.appendChild(table);
