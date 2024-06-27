@@ -1,6 +1,7 @@
 import Project from "./Project";
 import { deleteTodo } from "./deleteTodo";
 import { filterTodo } from "./filterTodo";
+import { expandTodo } from "./expandTodo";
 
 export function viewUpcoming() {
 	// function returns true if the storage has no values stored
@@ -29,6 +30,17 @@ export function viewUpcoming() {
 	}
 
 	for (var key in storage) {
+		// retrieving upcoming project data from storage and getting its project list after
+		const projectData = JSON.parse(storage[key]);
+		var project = new Project(projectData.name, projectData.projectList);
+		var projectList = project.getProjectList;
+		projectList = filterTodo(projectList, "upcoming");
+
+		// do not display any project with no todos
+		if (projectList.length == 0) {
+			continue;
+		}
+
 		// create separate header for each project
 		const h2 = document.createElement("h2");
 		h2.innerHTML = "Project name: " + key;
@@ -42,13 +54,7 @@ export function viewUpcoming() {
 		const table = document.createElement("table");
 		table.classList.add("todo-table");
 		const tr = document.createElement("tr");
-		const tableHeaders = [
-			"Title",
-			"Due date",
-			"Priority",
-			"Description",
-			"Delete",
-		];
+		const tableHeaders = ["Title", "Due date", "Delete", "Show more"];
 
 		for (let i = 0; i < tableHeaders.length; i++) {
 			const th = document.createElement("th");
@@ -58,46 +64,46 @@ export function viewUpcoming() {
 
 		table.appendChild(tr);
 
-		// retrieving all project data from storage and getting its project list after
-		const projectData = JSON.parse(storage[key]);
-		var project = new Project(projectData.name, projectData.projectList);
-		var projectList = project.getProjectList;
-		projectList = filterTodo(projectList, "upcoming");
+		// generate new row for each todo in the project
+		for (let i = 0; i < projectList.length; i++) {
+			const tr = document.createElement("tr");
+			let todoData = {};
 
-		// only display todo if there is more than 1 todo upcoming
-		if (projectList.length != 0) {
-			// generate new row for each todo in the project
-			for (let i = 0; i < projectList.length; i++) {
-				const tr = document.createElement("tr");
-				let todoData = {};
-
-				for (var todoKey in projectList[i]) {
-					const td = document.createElement("td");
-					td.innerHTML = projectList[i][todoKey];
-					todoData[todoKey] = projectList[i][todoKey];
-					tr.appendChild(td);
-				}
-
-				// add delete button
+			for (const todoKey of ["title", "dueDate"]) {
 				const td = document.createElement("td");
-				td.classList = "delete-button";
-				td.innerHTML = "Delete?";
-				td.addEventListener("click", function () {
-					deleteTodo(projectData.name, todoData, "upcoming");
-				});
+				td.innerHTML = projectList[i][todoKey];
+				todoData[todoKey] = projectList[i][todoKey];
 				tr.appendChild(td);
-				table.appendChild(tr);
 			}
-			tableContainer.appendChild(table);
-			content.appendChild(tableContainer);
-		}
-	}
 
-	// if there is no todo displayed, display the corresponding message
-	if (content.innerHTML == "<h1>Viewing Upcoming Todos</h1>") {
-		const p = document.createElement("p");
-		p.innerHTML = "There are currently no todos found!";
-		content.appendChild(p);
+			for (const todoKey of ["priority", "description"]) {
+				todoData[todoKey] = projectList[i][todoKey];
+			}
+
+			// add delete button
+			const deletetd = document.createElement("td");
+			deletetd.classList = "delete-button";
+			deletetd.innerHTML = "Delete?";
+			deletetd.addEventListener("click", function () {
+				deleteTodo(projectData.name, todoData, "upcoming");
+			});
+			tr.appendChild(deletetd);
+
+			// add show more data button
+			const showtd = document.createElement("td");
+			showtd.classList = "show-button";
+			showtd.innerHTML = "Show more?";
+			showtd.addEventListener("click", function () {
+				expandTodo(projectData.name, todoData);
+			});
+			tr.appendChild(showtd);
+
+			// add priority class to the td for styling
+			tr.classList = "priority-" + todoData["priority"];
+			table.appendChild(tr);
+		}
+		tableContainer.appendChild(table);
+		content.appendChild(tableContainer);
 	}
 
 	return content;

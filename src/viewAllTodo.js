@@ -34,12 +34,12 @@ export function viewAllTodo() {
 		const projectData = JSON.parse(storage[key]);
 		var project = new Project(projectData.name, projectData.projectList);
 		var projectList = project.getProjectList;
+		projectList = filterTodo(projectList, "all");
 
 		// do not display any project with no todos
 		if (projectList.length == 0) {
 			continue;
 		}
-		projectList = filterTodo(projectList, "all");
 
 		// create separate header for each project
 		const h2 = document.createElement("h2");
