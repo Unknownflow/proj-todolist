@@ -6,6 +6,7 @@ import { viewToday } from "./viewToday";
 import { viewUpcoming } from "./viewUpcoming";
 
 import "./styles.css";
+import { viewAllProjects } from "./viewAllProjects";
 
 function index() {
 	const addProjectButton = document.getElementById("add-project");
@@ -13,6 +14,7 @@ function index() {
 	const viewTodayButton = document.getElementById("view-today");
 	const viewUpcomingButton = document.getElementById("view-upcoming");
 	const viewAllTodoButton = document.getElementById("view-all-todo");
+	const viewAllProjectsButton = document.getElementById("view-all-projects");
 	viewAllTodo();
 
 	addProjectButton.addEventListener("click", function () {
@@ -31,9 +33,10 @@ function index() {
 		clearHtml();
 		viewUpcoming();
 	});
-	viewAllTodoButton.addEventListener("click", function () {
+
+	viewAllProjectsButton.addEventListener("click", function () {
 		clearHtml();
-		viewAllTodo();
+		viewAllProjects();
 	});
 }
 

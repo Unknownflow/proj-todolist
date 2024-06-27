@@ -199,3 +199,8 @@ td {
 		rgba(0, 0, 0, 0) 1%
 	);
 }
+
+.view-project-list {
+	margin: 20px;
+	text-align: left;
+}
