@@ -126,7 +126,8 @@ td {
 }
 
 .delete-button:hover,
-.show-button:hover {
+.show-button:hover,
+.close-button:hover {
 	background-color: #66a5ad;
 }
 

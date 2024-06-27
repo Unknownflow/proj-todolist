@@ -1,10 +1,14 @@
 import { closeTodoPopup } from "./closeTodoPopup";
 
 export function expandTodo(projectName, todoData) {
-	console.log(projectName, todoData);
+	// ensure that there is only a popup at a single time
+	if (document.querySelector(".popUp")) {
+		return;
+	}
+
 	const content = document.getElementById("content");
 	const popUp = document.createElement("div");
-	popUp.classList = "popUp";
+	popUp.classList.add("popUp");
 
 	// create a close button
 	const closeButton = document.createElement("div");
