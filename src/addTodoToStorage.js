@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import Project from "./Project";
 
-export function addToStorage(
+export function addTodoToStorage(
 	projectName,
 	title,
 	dueDate,

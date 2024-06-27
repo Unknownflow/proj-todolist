@@ -30,6 +30,17 @@ export function viewAllTodo() {
 	}
 
 	for (var key in storage) {
+		// retrieving all project data from storage and getting its project list after
+		const projectData = JSON.parse(storage[key]);
+		var project = new Project(projectData.name, projectData.projectList);
+		var projectList = project.getProjectList;
+
+		// do not display any project with no todos
+		if (projectList.length == 0) {
+			continue;
+		}
+		projectList = filterTodo(projectList, "all");
+
 		// create separate header for each project
 		const h2 = document.createElement("h2");
 		h2.innerHTML = "Project name: " + key;
@@ -52,12 +63,6 @@ export function viewAllTodo() {
 		}
 
 		table.appendChild(tr);
-
-		// retrieving all project data from storage and getting its project list after
-		const projectData = JSON.parse(storage[key]);
-		var project = new Project(projectData.name, projectData.projectList);
-		var projectList = project.getProjectList;
-		projectList = filterTodo(projectList, "all");
 
 		// generate new row for each todo in the project
 		for (let i = 0; i < projectList.length; i++) {
