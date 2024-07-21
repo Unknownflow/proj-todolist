@@ -33,6 +33,10 @@ function index() {
 		clearHtml();
 		viewUpcoming();
 	});
+	viewAllTodoButton.addEventListener("click", function () {
+		clearHtml();
+		viewAllTodo();
+	});
 
 	viewAllProjectsButton.addEventListener("click", function () {
 		clearHtml();
