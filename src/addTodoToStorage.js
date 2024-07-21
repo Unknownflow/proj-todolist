@@ -8,7 +8,13 @@ export function addTodoToStorage(
 	priority,
 	description
 ) {
-	const newTodoItem = new TodoItem(title, dueDate, priority, description);
+	const newTodoItem = new TodoItem(
+		title,
+		dueDate,
+		priority,
+		description,
+		false
+	);
 	var project;
 
 	// check if projectName exists

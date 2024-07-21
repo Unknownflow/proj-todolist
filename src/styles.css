@@ -85,7 +85,6 @@ select {
 
 th,
 td {
-	width: 25%;
 	padding: 10px 0;
 }
 
@@ -125,7 +124,7 @@ td {
 
 .delete-button,
 .show-button {
-	width: 100%;
+	width: auto;
 	height: 100%;
 	font-weight: bold;
 	background-color: #c4dfe6;
@@ -203,4 +202,12 @@ td {
 .view-project-list {
 	margin: 20px;
 	text-align: left;
+}
+
+tr td:first-child {
+	max-width: 15px;
+}
+.done-button {
+	width: 30px;
+	height: 30px;
 }

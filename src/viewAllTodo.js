@@ -2,6 +2,7 @@ import Project from "./Project";
 import { deleteTodo } from "./deleteTodo";
 import { filterTodo } from "./filterTodo";
 import { expandTodo } from "./expandTodo";
+import { updateTodoAsDone } from "./updateTodoAsDone";
 
 export function viewAllTodo() {
 	// function returns true if the storage has no values stored
@@ -54,7 +55,7 @@ export function viewAllTodo() {
 		const table = document.createElement("table");
 		table.classList.add("todo-table");
 		const tr = document.createElement("tr");
-		const tableHeaders = ["Title", "Due date", "Delete", "Show more"];
+		const tableHeaders = ["", "Title", "Due date", "Delete", "Show more"];
 
 		for (let i = 0; i < tableHeaders.length; i++) {
 			const th = document.createElement("th");
@@ -64,20 +65,53 @@ export function viewAllTodo() {
 
 		table.appendChild(tr);
 
+		const result = JSON.parse(localStorage.getItem(projectData.name))[
+			"projectList"
+		];
 		// generate new row for each todo in the project
 		for (let i = 0; i < projectList.length; i++) {
-			const tr = document.createElement("tr");
 			let todoData = {};
+
+			// loading tododata from the projectlist
+			for (const todoKey of [
+				"title",
+				"dueDate",
+				"priority",
+				"description",
+			]) {
+				todoData[todoKey] = projectList[i][todoKey];
+			}
+
+			const tr = document.createElement("tr");
+
+			// create a done button column
+			const donetd = document.createElement("td");
+			const doneButton = document.createElement("input");
+			doneButton.classList.add("done-button");
+			doneButton.type = "checkbox";
+
+			for (var item of result) {
+				if (
+					item["title"] == todoData["title"] &&
+					item["dueDate"] == todoData["dueDate"]
+				) {
+					if (item["isDone"] == true) {
+						doneButton.checked = true;
+						break;
+					}
+				}
+			}
+
+			doneButton.addEventListener("click", function () {
+				updateTodoAsDone(todoData, projectData.name);
+			});
+			donetd.appendChild(doneButton);
+			tr.appendChild(donetd);
 
 			for (const todoKey of ["title", "dueDate"]) {
 				const td = document.createElement("td");
 				td.innerHTML = projectList[i][todoKey];
-				todoData[todoKey] = projectList[i][todoKey];
 				tr.appendChild(td);
-			}
-
-			for (const todoKey of ["priority", "description"]) {
-				todoData[todoKey] = projectList[i][todoKey];
 			}
 
 			// add delete button
