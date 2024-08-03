@@ -6,3 +6,11 @@ A simple project created to keep track of tasks in custom project folders.
 - Data saved to local storage.
 - Fully responsive.
   
+
+## 💻 Technologies used
+
+<ul>
+  <li>Javascript</li>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
